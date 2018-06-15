@@ -24,14 +24,14 @@
         </div>
     </div>
 </template>
-
 <script>
+import { mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 import LiftComponent from '@/components/partials/LiftComponent'
 import FoodComponent from '@/components/partials/FoodComponent'
 import BodyweightComponent from '@/components/partials/BodyweightComponent'
 
 export default {
-    middleware: 'auth',
     components: {
         'lift-component': LiftComponent,
         'food-component': FoodComponent,
@@ -42,8 +42,26 @@ export default {
             name: 'Austin Bailey',
         }
     },
+    created: function() {
+        if (!this.getLoggedIn()) {
+            this.$router.push({ path: '/login' })
+        }
+    },
     methods: {
-
+        logout() {
+            this.setLoggedIn(false);
+            this.setKey(null);
+            this.setId(null);
+            this.$router.push({ path: '/login' });
+        },
+        ...mapGetters([
+            'getLoggedIn'
+        ]),
+        ...mapMutations([
+            'setKey',
+            'setId',
+            'setLoggedIn',
+        ]),
     }
 }
 </script>
