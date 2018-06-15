@@ -36,15 +36,13 @@ class BodyweightController extends Controller
     }
 
     public function deleteBodyweight(Request $request) {
-        try {
-            Bodyweight::where('id', $request->id)->delete();
+        if (Bodyweight::where('id', $request->id)->delete()) {
             return response()->json([
                 'success' => 'Bodyweight deleted successfully'
             ]);
-        } catch(QueryException $e) {
-            return response()->json([
-                'failure' => 'Unable to delete bodyweight'
-            ], 400);
         }
+        return response()->json([
+            'failure' => 'Sorry, we were unable to delete that data'
+        ]);
     }
 }
