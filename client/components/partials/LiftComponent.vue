@@ -66,40 +66,39 @@ export default {
         }
     },
     created: function() {
+        var self = this;
         this.$axios.get(
-            'http://localhost:8080/api/lifts/' + this.getId()
-        ).then(response => {
-            var data = JSON.parse(response.bodyText);
-            this.lifts = data;
+            'http://localhost:8000/api/lifts/' + self.user.id
+        ).then(function(response) {
+            self.lifts = response.data;
         });
 
         this.$axios.get(
-            'http://localhost:8080/api/lifttypes/' + this.getId()
-        ).then(response => {
-            var data = JSON.parse(response.bodyText);
-            this.lifttypes = data;
-            this.selectedLiftChartType = data[0].name;
-            this.liftFormData.type = 'select';
+            'http://localhost:8000/api/lifttypes/' + self.user.id
+        ).then(function(response) {
+            self.lifttypes = response.data;
+            self.selectedLiftChartType = response.data[0].name;
+            self.liftFormData.type = 'select';
         });
     },
     methods: {
         postLift: function(event) {
+            var self = this;
             this.$axios.post(
-                'http://localhost:8080/api/lifts/',
+                'http://localhost:8000/api/lift/',
                 {
-                    key: this.getKey(),
-                    user: this.getId(),
+                    user: self.user.id,
                     ...this.liftFormData
                 }
-            ).then(response => {
-                var dateString = this.getTonightMidnight();
+            ).then(function(response) {
+                var dateString = self.getTonightMidnight();
                 var newLift = {
-                    weight: this.liftFormData.weight,
-                    reps: this.liftFormData.reps,
-                    type: this.liftFormData.type,
+                    weight: self.liftFormData.weight,
+                    reps: self.liftFormData.reps,
+                    type: self.liftFormData.type,
                     date: dateString
                 };
-                this.lifts.push(newLift);
+                self.lifts.push(newLift);
             });
         },
         getTonightMidnight: function() {

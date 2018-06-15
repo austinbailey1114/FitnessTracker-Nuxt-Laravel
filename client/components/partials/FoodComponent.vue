@@ -92,7 +92,7 @@ export default {
         }
     },
     mounted: function() {
-        this.$axios.get('http://localhost:8080/api/foods/goals/' + this.getId()).then(response => {
+        this.$axios.get('http://localhost:8000/api/foods/goals/' + this.getId()).then(response => {
             var data = JSON.parse(response.bodyText);
             this.goals.cals = data.calories;
             this.goals.fat = data.fat;
@@ -110,7 +110,7 @@ export default {
                 };
 
                 this.$axios.post(
-                    'http://localhost:8080/api/foods/goals/',
+                    'http://localhost:8000/api/foods/goals/',
                     data
                 ).then(response => {
                     console.log(response);

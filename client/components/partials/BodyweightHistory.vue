@@ -39,18 +39,15 @@ export default {
     },
     methods: {
         deleteBodyweight: function(bodyweight) {
-            this.$axios.delete(
-                'http://localhost:8080/api/bodyweights/',
+            var self = this;
+            this.$axios.post(
+                'http://localhost:8000/api/deleteBodyweight/',
                 {
-                    body: {
-                        id: bodyweight.id,
-                        key: this.getKey(),
-                        user: this.getId()
-                    }
+                    id: bodyweight.id,
                 }
-            ).then(response => {
-                var index = this.bodyweights.indexOf(bodyweight);
-                this.bodyweights.splice(index, 1);
+            ).then(function(response) {
+                var index = self.bodyweights.indexOf(bodyweight);
+                self.bodyweights.splice(index, 1);
             });
         },
         ...mapGetters([

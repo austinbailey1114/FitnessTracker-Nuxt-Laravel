@@ -52,7 +52,7 @@ export default {
     methods: {
         deleteLift: function(lift) {
             this.$axios.delete(
-                'http://localhost:8080/api/lifts/',
+                'http://localhost:8000/api/lifts/',
                 {
                     body: {
                         id: lift.id,

@@ -32,28 +32,27 @@ export default {
     created: function() {
         var self = this;
         this.$axios.get(
-            'http://localhost:8080/api/bodyweights/' + self.user.id
-        ).then(response => {
-            var data = JSON.parse(response.bodyText);
-            self.bodyweights = data;
+            'http://localhost:8000/api/bodyweights/' + self.user.id
+        ).then(function(response) {
+            self.bodyweights = response.data;
         });
     },
     methods: {
         postBodyweight: function() {
+            var self = this;
             this.$axios.post(
-                'http://localhost:8080/api/bodyweights/',
+                'http://localhost:8000/api/bodyweight/',
                 {
                     weight: this.newWeight,
-                    key: this.getKey(),
-                    user: this.getId()
+                    user: self.user.id
                 }
-            ).then(response => {
-                var dateString = this.getTonightMidnight();
+            ).then(function(response) {
+                var dateString = self.getTonightMidnight();
                 var newBodyweight = {
                     date: dateString,
-                    weight: this.newWeight,
+                    weight: self.newWeight,
                 };
-                this.bodyweights.push(newBodyweight);
+                self.bodyweights.push(newBodyweight);
             });
         },
         getTonightMidnight: function() {
