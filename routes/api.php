@@ -15,5 +15,7 @@ Route::get('/foodGoals/{id}', 'GoalsController@getFoodGoals');
 Route::post('/lift', 'LiftController@postLift');
 Route::get('/lifts/{id}', 'LiftController@getLift');
 Route::post('/deleteLift', 'LiftController@deleteLift');
+//lifttypes
+Route::get('/lifttypes/{id}', 'LifttypeController@getLifttypes');
 
 Route::get('/me', 'Auth\MeController@me');
