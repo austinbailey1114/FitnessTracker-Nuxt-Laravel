@@ -24,6 +24,8 @@ class GoalsController extends Controller
     }
 
     public function postFoodGoals(Request $request) {
+        var_dump($request->all());
+        exit();
         if (Goals::where('user', $request->id)->update([
             'calories' => $request->cals,
             'fat' => $request->fat,
@@ -37,7 +39,7 @@ class GoalsController extends Controller
 
         return response()->json([
             'failure' => 'Sorry, we were unable to update that data'
-        ]);
+        ], 400);
 
 
     }

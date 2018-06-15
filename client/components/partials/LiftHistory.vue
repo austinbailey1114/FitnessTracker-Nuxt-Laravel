@@ -51,17 +51,14 @@ export default {
     },
     methods: {
         deleteLift: function(lift) {
-            this.$axios.delete(
-                'http://localhost:8000/api/lifts/',
+            var self = this;
+            this.$axios.post(
+                'http://localhost:8000/api/deleteLift/',
                 {
-                    body: {
-                        id: lift.id,
-                        key: this.getKey(),
-                        user: this.getId()
-                    }
+                    id: lift.id,
                 }).then(response => {
-                    var index = this.lifts.indexOf(lift);
-                    this.lifts.splice(index, 1);
+                    var index = self.lifts.indexOf(lift);
+                    self.lifts.splice(index, 1);
                 }
             );
         },

@@ -1,11 +1,10 @@
 <template lang="html">
     <div>
-        <!-- https://dribbble.com/shots/4549955-Daily-18 -->
         <link rel="stylesheet" href="#">
         <div class="top">
             <div class="top-left inline">
                 <div class="title inline">
-                    <img class="image" src="" height="40" width="40">
+                    <img class="image" src="hugeIcon.png" height="70" width="70">
                     <p class="header" align="center">Dashboard</p>
                 </div>
                 <div class="links-container inline">

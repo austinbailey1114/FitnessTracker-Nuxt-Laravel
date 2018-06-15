@@ -92,27 +92,30 @@ export default {
         }
     },
     mounted: function() {
-        this.$axios.get('http://localhost:8000/api/foods/goals/' + this.getId()).then(response => {
-            var data = JSON.parse(response.bodyText);
-            this.goals.cals = data.calories;
-            this.goals.fat = data.fat;
-            this.goals.carbs = data.carbohydrate;
-            this.goals.protein = data.protein;
+        var self = this;
+        this.$axios.get(
+            'http://localhost:8000/api/foodGoals/' + self.user.id
+        ).then(function(response) {
+            var data = response.data
+            self.goals.cals = data.calories;
+            self.goals.fat = data.fat;
+            self.goals.carbs = data.carbohydrate;
+            self.goals.protein = data.protein;
         });
     },
     methods: {
         editClicked: function() {
+            console.log(this.goals)
             if (this.isEditing) {
                 var data = {
-                    id: this.getId(),
-                    key: this.getKey(),
+                    user: this.user.id,
                     ...this.goals
                 };
 
                 this.$axios.post(
-                    'http://localhost:8000/api/foods/goals/',
+                    'http://localhost:8000/api/foodGoals/',
                     data
-                ).then(response => {
+                ).then(function(response) {
                     console.log(response);
                 });
 
