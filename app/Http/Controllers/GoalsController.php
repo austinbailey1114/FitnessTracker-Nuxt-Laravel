@@ -24,9 +24,7 @@ class GoalsController extends Controller
     }
 
     public function postFoodGoals(Request $request) {
-        var_dump($request->all());
-        exit();
-        if (Goals::where('user', $request->id)->update([
+        if (Goals::where('user', $request->user)->update([
             'calories' => $request->cals,
             'fat' => $request->fat,
             'carbohydrate' => $request->carbs,

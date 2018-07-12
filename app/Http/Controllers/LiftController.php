@@ -8,7 +8,7 @@ use App\Lift;
 class LiftController extends Controller
 {
     public function getLift(Request $request) {
-        $lifts = Lift::where('user', $request->id)->get();
+        $lifts = Lift::where('user', $request->id)->orderBy('date', 'asc')->get();
 
         return response()->json($lifts);
     }

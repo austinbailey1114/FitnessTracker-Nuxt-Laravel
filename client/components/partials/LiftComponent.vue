@@ -45,6 +45,8 @@ import { mapGetters } from 'vuex'
 import LiftField from '@/components/partials/LiftField'
 import LiftHistory from '@/components/partials/LiftHistory'
 import MaskedInput from 'vue-masked-input'
+import moment from 'moment'
+import momentTimezone from 'moment-timezone'
 
 export default {
     components: {
@@ -91,14 +93,32 @@ export default {
                     ...this.liftFormData
                 }
             ).then(function(response) {
-                var dateString = self.getTonightMidnight();
+                var dateString
+                if (self.liftFormData.date) {
+                    dateString = moment(self.liftFormData.date).tz('America/New_York').utc().format("YYYY-MM-DD 00:00:00")
+                } else {
+                    dateString = moment().tz('America/New_York').utc().format("YYYY-MM-DD 00:00:00")
+                }
+                console.log(dateString)
                 var newLift = {
                     weight: self.liftFormData.weight,
                     reps: self.liftFormData.reps,
                     type: self.liftFormData.type,
                     date: dateString
                 };
-                self.lifts.push(newLift);
+                //self.lifts.push(newLift);
+                var inserted = false
+                for (var i = 0; i < self.lifts.length; i++) {
+                    if (moment(self.lifts[i].date).diff(moment(newLift.date)) > 0) {
+                        self.lifts.splice(i, 0, newLift)
+                        inserted = true
+                        break
+                    }
+                }
+
+                if (!inserted) {
+                    self.lifts.push(newLift)
+                }
             });
         },
         getTonightMidnight: function() {
