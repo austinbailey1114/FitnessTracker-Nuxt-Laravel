@@ -26,7 +26,7 @@
                     <p class="table-item inline">{{ lift.weight }}</p>
                     <p class="table-item inline">{{ lift.reps }}</p>
                     <p class="table-item inline">{{ lift.type }}</p>
-                    <p class="table-item inline">{{ lift.date }}</p>
+                    <p class="table-item inline">{{ lift.human_date }}</p>
                     <button @click="deleteLift(lift)" class="delete-button inline">X</button>
                 </div>
             </div>
@@ -36,6 +36,7 @@
 
 <script>
 import Graph from '@/components/partials/Chart.vue'
+import moment from 'moment'
 import { mapGetters } from 'vuex'
 
 export default {

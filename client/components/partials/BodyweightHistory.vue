@@ -15,7 +15,7 @@
             <div class="overflow-y">
                 <div v-for="(bodyweight, index) in bodyweights" :key="index" class="table-row">
                     <p class="table-item inline">{{ bodyweight.weight }}</p>
-                    <p class="table-item inline">{{ bodyweight.date }}</p>
+                    <p class="table-item inline">{{ bodyweight.human_date }}</p>
                     <button @click="deleteBodyweight(bodyweight)" class="delete-button inline">X</button>
                 </div>
             </div>

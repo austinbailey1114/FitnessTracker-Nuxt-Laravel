@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\BodyweightResource;
 use App\bodyweight;
 
 class BodyweightController extends Controller
@@ -10,7 +11,7 @@ class BodyweightController extends Controller
     public function getBodyweight(Request $request) {
         $bodyweights = Bodyweight::where('user', $request->id)->get();
 
-        return response()->json($bodyweights);
+        return BodyweightResource::collection($bodyweights);
     }
 
     public function postBodyweight(Request $request) {

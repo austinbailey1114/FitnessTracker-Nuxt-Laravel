@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\LiftResource;
 use App\Lift;
 
 class LiftController extends Controller
@@ -10,7 +11,7 @@ class LiftController extends Controller
     public function getLift(Request $request) {
         $lifts = Lift::where('user', $request->id)->orderBy('date', 'asc')->get();
 
-        return response()->json($lifts);
+        return LiftResource::collection($lifts);
     }
 
     public function postLift(Request $request) {

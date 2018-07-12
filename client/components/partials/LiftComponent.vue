@@ -72,7 +72,7 @@ export default {
         this.$axios.get(
             'http://localhost:8000/api/lifts/' + self.user.id
         ).then(function(response) {
-            self.lifts = response.data;
+            self.lifts = response.data.data;
         });
 
         this.$axios.get(
@@ -120,15 +120,6 @@ export default {
                     self.lifts.push(newLift)
                 }
             });
-        },
-        getTonightMidnight: function() {
-            var d = new Date();
-            d.setHours(0,0,0,0);
-            var month = d.getMonth() + 1;;
-            var date = d.getDate();;
-            if (d.getMonth() < 9) month = '0' + month;
-            if (d.getDate() < 10) date = '0' + date;
-            return d.getFullYear() + '-' + month + '-' + date + " 00:00:00";
         },
         ...mapGetters([
             'getKey',

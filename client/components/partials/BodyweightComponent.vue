@@ -34,7 +34,7 @@ export default {
         this.$axios.get(
             'http://localhost:8000/api/bodyweights/' + self.user.id
         ).then(function(response) {
-            self.bodyweights = response.data;
+            self.bodyweights = response.data.data;
         });
     },
     methods: {
