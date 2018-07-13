@@ -46,13 +46,18 @@
         <div class="container-child inline food-stuff">
             <div class="new-food">
                 <form class="food-form" action="#" method="post">
-                    <input type="text" name="searchField" class="food-search" placeholder="Search food database">
+                    <input class="food-search" placeholder="Search food database" @input="search" v-model="searchInput">
                 </form>
+            </div>
+            <div class="food-modal" v-if="foods.length > 0">
+                <p v-for="(food, index) in foods" :key="index" class="food-search-item" @click="showNutrients(food.ndbno)">
+                    {{ food.name }}
+                </p>
             </div>
             <div class="food-history">
                 <p v-if="foods.length < 1" class="food-history-none">No recent foods to show</p>
                 <span v-else>
-                    <p v-for="(food, index) in foods" :key="index" class="food-history-item">
+                    <p v-for="(food, index) in recentFoods" :key="index" class="food-history-item">
                         {{ food }}
                     </p>
                 </span>
@@ -69,6 +74,7 @@ export default {
     data: function() {
         return {
             foods: [],
+            recentFoods: [],
             totals: {
                 'cals': 200,
                 'fat': 41,
@@ -88,6 +94,7 @@ export default {
                 borderRadius: '7px',
                 minWidth: 'max-content',
             },
+            searchInput: '',
             isEditing: false,
         }
     },
@@ -121,6 +128,42 @@ export default {
 
             }
             this.isEditing = !this.isEditing;
+        },
+        search() {
+            //console.log(this.searchInput)
+            if (this.searchInput == '') {
+                this.foods = []
+                return
+            }
+            var self = this
+            this.$axios.get(
+                'https://api.nal.usda.gov/ndb/search/',
+                {
+                    params: {
+                        api_key: 'vTyovxE8ZlRheES3nZoKa3v0CM2Vga1KGOylnDiG',
+                        q: self.searchInput,
+                        max: 10
+                    }
+                }
+            ).then(function(response) {
+                self.foods = response.data.list.item
+                console.log(self.foods)
+            })
+        },
+        showNutrients(id) {
+            console.log(id)
+            var self = this
+            this.$axios.get(
+                'https://api.nal.usda.gov/ndb/nutrients/?nutrients=204&nutrients=205&nutrients=208&nutrients=269',
+                {
+                    params: {
+                        api_key: 'vTyovxE8ZlRheES3nZoKa3v0CM2Vga1KGOylnDiG',
+                        ndbno: id,
+                    }
+                }
+            ).then(function(response) {
+                console.log(response)
+            })
         },
         ...mapGetters([
             'getKey',
