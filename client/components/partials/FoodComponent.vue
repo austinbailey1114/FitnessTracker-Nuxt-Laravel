@@ -62,6 +62,16 @@
                     </p>
                 </span>
             </div>
+            <div class="modal" :class="{ 'modal-is-active': modal }">
+                <div v-if="modalFood">
+                    <p class="food-history-item"> {{ modalFood.name }}</p>
+                    <div v-for="(nutrient, index) in modalFood.nutrients" :key="index">
+                        <p class="food-history-item">{{ nutrient.nutrient }}: {{ nutrient.value }}{{ nutrient.unit }}</p>
+                    </div>
+                    <button class="form-submit">Save</button>
+                    <button class="form-submit" @click="exitModal">Back</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -96,6 +106,8 @@ export default {
             },
             searchInput: '',
             isEditing: false,
+            modal: false,
+            modalFood: null,
         }
     },
     mounted: function() {
@@ -163,7 +175,15 @@ export default {
                 }
             ).then(function(response) {
                 console.log(response)
+                self.modalFood = response.data.report.foods[0]
+                self.modal = true
             })
+        },
+        exitModal() {
+            this.modalFood = null
+            this.modal = false
+            this.foods = []
+            this.searchInput = ''
         },
         ...mapGetters([
             'getKey',
