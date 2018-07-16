@@ -4,7 +4,7 @@
         <div class="top">
             <div class="top-left inline">
                 <div class="title inline">
-                    <img class="image" src="hugeIcon.png" height="70" width="70">
+                    <img class="image" src="hugeIcon.png" height="60" width="60">
                     <p class="header" align="center">Dashboard</p>
                 </div>
                 <div class="links-container inline">
