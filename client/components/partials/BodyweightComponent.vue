@@ -4,10 +4,11 @@
             <bodyweight-history :bodyweights="bodyweights"></bodyweight-history>
         </div>
         <div class="new-weight container-child inline">
+            <p class="header-small">Log New Bodyweight</p>
             <form class="bodyweight-form" method="post">
-                <div class="bodyweight-field">
-                    <p class="bodyweight-field-prompt">Weight</p>
-                    <input v-model="newWeight" class="numeric-input bodyweight-input" type="text" name="weight" placeholder="pounds">
+                <div class="lift-field">
+                    <p class="lift-prompt">Weight</p>
+                    <input v-model="newWeight" class="numeric-input lift-input" type="text" name="weight" placeholder="pounds">
                     <p class="help is-danger" v-if="errors.weight">
                         {{ errors.weight[0] }}
                     </p>
