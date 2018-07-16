@@ -23,13 +23,15 @@ export default {
             	    }]
             	},
             	options: {
+                    defaultFontColor: 'white',
             	    responsive: true,
             	    maintainAspectRatio: false,
             	    legend: {
-            	        display: false
+            	        display: false,
             	     },
             	}
             });
+            Chart.defaults.global.defaultFontColor='white';
         }
     }
 }

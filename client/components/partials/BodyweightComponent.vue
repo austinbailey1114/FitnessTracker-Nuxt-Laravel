@@ -8,6 +8,9 @@
                 <div class="bodyweight-field">
                     <p class="bodyweight-field-prompt">Weight</p>
                     <input v-model="newWeight" class="numeric-input bodyweight-input" type="text" name="weight" placeholder="pounds">
+                    <p class="help is-danger" v-if="errors.weight">
+                        {{ errors.weight[0] }}
+                    </p>
                 </div>
                 <button @click.prevent="postBodyweight()" class="form-submit form-submit-bodyweight">Update</button>
             </form>
@@ -39,7 +42,7 @@ export default {
     },
     methods: {
         postBodyweight: function() {
-            var self = this;
+            var self = this
             this.$axios.post(
                 'http://localhost:8000/api/bodyweight/',
                 {
@@ -47,13 +50,13 @@ export default {
                     user: self.user.id
                 }
             ).then(function(response) {
-                var dateString = self.getTonightMidnight();
+                var dateString = self.getTonightMidnight()
                 var newBodyweight = {
                     date: dateString,
                     weight: self.newWeight,
-                };
-                self.bodyweights.push(newBodyweight);
-            });
+                }
+                self.bodyweights.push(newBodyweight)
+            })
         },
         getTonightMidnight: function() {
             var d = new Date();

@@ -17,6 +17,11 @@ class LiftController extends Controller
 
     public function postLift(Request $request) {
 
+        $this->validate($request, [
+            'weight' => 'required|numeric',
+            'reps' => 'required|numeric',
+        ]);
+
         if ($request->date == "") {
 			$date = strtotime('today midnight');
 		} else {

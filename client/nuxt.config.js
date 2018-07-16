@@ -20,7 +20,7 @@ module.exports = {
    },
   css: [
       //'css/mystyles.scss',
-      'css/index.scss'
+      'css/new.scss'
   ],
   /*
   ** Customize the progress bar color

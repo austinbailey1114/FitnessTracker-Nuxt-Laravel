@@ -1,0 +1,179 @@
+/* GLOBAL */
+
+* {
+	transition: 0.2s ease all;
+}
+
+body {
+    font-family: 'Roboto' !important;
+	margin:0;
+	padding: 0;
+	background-color: #292C3D;
+    color: #EAEDEE;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.header {
+	display: inline-block;
+	font-size: 30px;
+	font-weight: 200;
+	line-height: 65px;
+	padding-right: 10px;
+    color: white;
+}
+
+.header-small {
+	display: inline-block;
+	font-size: 25px;
+	font-weight: 400;
+	line-height: 45px;
+	padding-right: 5px;
+    padding-left: 0px;
+	margin: 10px;
+    color: white;
+}
+
+.container {
+	height: 400px;
+	margin: 30px 30px;
+	padding: 10px 10px;
+}
+
+.container-child {
+    background-color: #3B3C4E;
+    border-radius: 5px;
+	height: 100%;
+	//box-shadow: 0 7px 14px 0 rgba(50,50,93,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+    -webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
+    box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
+    display: inline-block;
+    padding: 3px;
+}
+
+.form-submit {
+    background-color: #7354ff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    float: right;
+    margin-right: 4%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.link-small {
+    background-color: #7354ff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    float: right;
+    margin-right: 2%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+//lift
+
+.lift-graph {
+	float: right;
+	width: 55%
+}
+
+.new-lift {
+	float: left;
+	width: 40%;
+}
+
+.lift-prompt {
+    color: white;
+    font-weight: 200;
+}
+
+.lift-field {
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.lift-input {
+    border: none;
+	font-size: 12px;
+	padding: 6px 1.5%;
+	font-weight: 200;
+	text-align: left;
+	width: 97%;
+	border-bottom: 1px solid #D8D3D1;
+    background-color: #3B3C4E;
+}
+
+.lift-chart-container {
+    height: 260px;
+    width: 95%;
+    margin: auto;
+    margin-top: 5px;
+}
+
+//select
+
+.select-container {
+    margin-top: 6px;
+    border: 1px solid #D8D3D1;
+    border-radius: 4px;
+
+    width: 97%;
+    padding: 3px 0px;
+    padding-right: 6px;
+    //background-color: #6446ea;
+}
+
+.select {
+    border: none;
+    margin: 3px;
+    font-size: 12px;
+    background: none;
+    color: white;
+    width: 100%;
+
+}
+
+.narrow-select {
+    width: 30%;
+    margin: auto;
+}
+
+//food
+
+.food-stuff {
+	float: left;
+	width: 50%;
+}
+
+.food-total {
+	float: right;
+	width: 45%;
+}
+
+
+
+//bodyweight
+
+.new-weight {
+	float: right;
+	width: 40%;
+	height: 120px;
+}
+
+.bodyweight-graph {
+	float: left;
+	width: 55%;
+}

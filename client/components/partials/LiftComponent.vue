@@ -4,14 +4,21 @@
             <lift-history :lifts="lifts" :lifttypes="lifttypes"></lift-history>
         </div>
         <div class="new-lift inline container-child">
+            <p class="header-small">Log A New Lift</p>
             <form>
                 <div class="lift-field">
                     <p class="lift-prompt">Weight</p>
                     <input v-model="liftFormData.weight" class="numeric-input lift-input" type="text" placeholder="pounds" autocomplete="off">
+                    <p class="help is-danger" v-if="errors.weight">
+                        {{ errors.weight[0] }}
+                    </p>
                 </div>
                 <div class="lift-field">
                     <p class="lift-prompt">Reps</p>
                     <input v-model="liftFormData.reps" class="numeric-input lift-input" type="text" placeholder="pounds" autocomplete="off">
+                    <p class="help is-danger" v-if="errors.reps">
+                        {{ errors.reps[0] }}
+                    </p>
                 </div>
                 <div class="lift-field">
                     <p class="lift-prompt">Date</p>

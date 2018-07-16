@@ -16,6 +16,10 @@ class BodyweightController extends Controller
 
     public function postBodyweight(Request $request) {
 
+        $this->validate($request, [
+            'weight' => 'required|numeric'
+        ]);
+
         $date = strtotime('today midnight');
 		$date = date("Y-m-d H:i:s", $date);
 
