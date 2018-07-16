@@ -55,10 +55,10 @@
                 </p>
             </div>
             <div class="food-history">
-                <p v-if="foods.length < 1" class="food-history-none">No recent foods to show</p>
+                <p v-if="recentFoods.length < 1" class="food-history-none">No recent foods to show</p>
                 <span v-else>
                     <p v-for="(food, index) in recentFoods" :key="index" class="food-history-item">
-                        {{ food }}
+                        {{ food.name }}
                     </p>
                 </span>
             </div>
@@ -68,7 +68,7 @@
                     <div v-for="(nutrient, index) in modalFood.nutrients" :key="index">
                         <p class="food-history-item">{{ nutrient.nutrient }}: {{ nutrient.value }}{{ nutrient.unit }}</p>
                     </div>
-                    <button class="form-submit">Save</button>
+                    <button class="form-submit" @click="saveFood">Save</button>
                     <button class="form-submit" @click="exitModal">Back</button>
                 </div>
             </div>
@@ -110,17 +110,24 @@ export default {
             modalFood: null,
         }
     },
-    mounted: function() {
-        var self = this;
+    created() {
+        var self = this
         this.$axios.get(
             'http://localhost:8000/api/foodGoals/' + self.user.id
         ).then(function(response) {
             var data = response.data
-            self.goals.cals = data.calories;
-            self.goals.fat = data.fat;
-            self.goals.carbs = data.carbohydrate;
-            self.goals.protein = data.protein;
-        });
+            self.goals.cals = data.calories
+            self.goals.fat = data.fat
+            self.goals.carbs = data.carbohydrate
+            self.goals.protein = data.protein
+        })
+
+        this.$axios.get(
+            process.env.apiURL + '/api/recentFoods/' + self.user.id
+        ).then(function(response) {
+            console.log(response)
+            self.recentFoods = response.data
+        })
     },
     methods: {
         editClicked: function() {
@@ -166,7 +173,7 @@ export default {
             console.log(id)
             var self = this
             this.$axios.get(
-                'https://api.nal.usda.gov/ndb/nutrients/?nutrients=204&nutrients=205&nutrients=208&nutrients=269',
+                'https://api.nal.usda.gov/ndb/nutrients/?nutrients=204&nutrients=205&nutrients=208&nutrients=203',
                 {
                     params: {
                         api_key: 'vTyovxE8ZlRheES3nZoKa3v0CM2Vga1KGOylnDiG',
@@ -184,6 +191,33 @@ export default {
             this.modal = false
             this.foods = []
             this.searchInput = ''
+        },
+        saveFood() {
+            var self = this
+            var params = {
+                user: this.user.id,
+                name: this.modalFood.name,
+            }
+            for (var i = 0; i < this.modalFood.nutrients.length; i++) {
+                if (this.modalFood.nutrients[i].nutrient_id == 205) {
+                    params.carbohydrate = this.modalFood.nutrients[i].value
+                }
+                else if (this.modalFood.nutrients[i].nutrient_id == 204) {
+                    params.fat = this.modalFood.nutrients[i].value
+                }
+                else if (this.modalFood.nutrients[i].nutrient_id == 203) {
+                    params.protein = this.modalFood.nutrients[i].value
+                }
+                else if (this.modalFood.nutrients[i].nutrient_id == 208) {
+                    params.calories = this.modalFood.nutrients[i].value
+                }
+            }
+            this.$axios.post(
+                process.env.apiURL + '/api/food',
+                params
+            ).then(function(response) {
+                self.exitModal()
+            })
         },
         ...mapGetters([
             'getKey',

@@ -11,6 +11,9 @@ Route::post('/deleteBodyweight', 'BodyweightController@deleteBodyweight');
 //food goals
 Route::post('/foodGoals', 'GoalsController@postFoodGoals');
 Route::get('/foodGoals/{id}', 'GoalsController@getFoodGoals');
+//foods
+Route::post('/food', 'FoodController@postFood');
+Route::get('/recentFoods/{user}', 'FoodController@recentFoods');
 //lifts
 Route::post('/lift', 'LiftController@postLift');
 Route::get('/lifts/{id}', 'LiftController@getLift');

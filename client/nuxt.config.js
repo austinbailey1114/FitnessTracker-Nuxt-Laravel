@@ -15,6 +15,9 @@ module.exports = {
       //{ rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css' }
     ]
   },
+  env: {
+     apiURL: process.env.API_URL || 'http://localhost:8000'
+   },
   css: [
       //'css/mystyles.scss',
       'css/index.scss'
