@@ -15,23 +15,22 @@
                 </div>
                 <div class="lift-field">
                     <p class="lift-prompt">Date</p>
-                    <!-- <input v-model="liftFormData.date" class="numeric-input lift-input" type="text" placeholder="pounds" autocomplete="off"> -->
                     <masked-input v-model="liftFormData.date" class="numeric-input lift-input" mask="11/11/1111" placeholder="mm/dd/yyyy"></masked-input>
                 </div>
                 <div class="lift-field">
                     <p class="lift-prompt inline">Type</p>
-                    <div class="select-container">
-                        <select v-model="liftFormData.type" class="select" name='liftType'>
+                    <div v-if="!newLiftType" class="select-container">
+                        <select v-model="liftFormData.type" class="select" @change="selectChanged">
                             <option value="select">-- Select Type--</option>
                             <option value="new">New</option>
                             <option v-for="(type, index) in lifttypes" :key="index" :val="type.name">{{ type.name }}</option>
                         </select>
                     </div>
-                    <div id="newType" style="display: none">
-                        <button id='exitNewLift' type=button>
-                            <img src="" height='15' width='15' style='margin-right: 5px;'>
-                        </button>
-                        <input id="lift-input-type" class="lift-input" type='text' name='newType' placeholder='new type' autocomplete='off'>
+                    <div v-else>
+                        <div class="inline" @click.prevent="clearNewType">
+                            X
+                        </div>
+                        <input class="lift-input" placeholder='New Lift Type' autocomplete='off' v-model="liftFormData.newType">
                     </div>
                 </div>
                 <button @click.prevent="postLift()" class="form-submit">Save Lift</button>
@@ -63,8 +62,9 @@ export default {
                 reps: null,
                 date: null,
                 type: null,
-                liftType: null,
-            }
+                newType: null,
+            },
+            newLiftType: false,
         }
     },
     created: function() {
@@ -99,14 +99,12 @@ export default {
                 } else {
                     dateString = moment().tz('America/New_York').utc().format("YYYY-MM-DD 00:00:00")
                 }
-                console.log(dateString)
                 var newLift = {
                     weight: self.liftFormData.weight,
                     reps: self.liftFormData.reps,
-                    type: self.liftFormData.type,
+                    type: (self.liftFormData.newType ? self.liftFormData.newType : self.liftFormData.type),
                     date: dateString
-                };
-                //self.lifts.push(newLift);
+                }
                 var inserted = false
                 for (var i = 0; i < self.lifts.length; i++) {
                     if (moment(self.lifts[i].date).diff(moment(newLift.date)) > 0) {
@@ -119,7 +117,25 @@ export default {
                 if (!inserted) {
                     self.lifts.push(newLift)
                 }
+
+                if (self.liftFormData.newType) {
+                    self.lifttypes.push({name: self.liftFormData.newType})
+                    self.clearNewType()
+                }
             });
+        },
+        selectChanged() {
+            if (this.liftFormData.type == "new") {
+                this.setNewType()
+            }
+        },
+        clearNewType() {
+            this.newLiftType = false
+            this.liftFormData.type = "select"
+            this.liftFormData.newType = null
+        },
+        setNewType() {
+            this.newLiftType = true
         },
         ...mapGetters([
             'getKey',

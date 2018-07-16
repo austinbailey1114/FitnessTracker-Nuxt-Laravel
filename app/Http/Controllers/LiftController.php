@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\LiftResource;
 use App\Lift;
+use App\Lifttype;
 
 class LiftController extends Controller
 {
@@ -24,11 +25,22 @@ class LiftController extends Controller
 
 		$date = date("Y-m-d H:i:s", $date);
 
+        if ($request->newType) {
+            $type = $request->newType;
+
+            Lifttype::create([
+                'user' => $request->user,
+                'name' => $type,
+            ]);
+        } else {
+            $type = $request->type;
+        }
+
         $created = Lift::create([
             'weight' => $request->weight,
             'reps' => $request->reps,
             'date' => $date,
-            'type' => $request->type,
+            'type' => $type,
             'user' => $request->user,
         ]);
 

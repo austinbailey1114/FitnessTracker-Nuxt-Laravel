@@ -230,7 +230,7 @@ export default {
                 process.env.apiURL + '/api/food',
                 params
             ).then(function(response) {
-                self.recentFoods.push({
+                self.recentFoods.unshift({
                     name: self.modalFood.name
                 })
 
