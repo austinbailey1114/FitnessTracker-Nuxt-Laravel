@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Foods;
+use Carbon\Carbon;
 
 class FoodController extends Controller
 {
@@ -35,5 +36,17 @@ class FoodController extends Controller
                       ->get();
 
         return response()->json($foods);
+    }
+
+    public function getTotals(Request $request) {
+        $foods = Foods::where('user', $request->user)
+                      ->whereDate('created_at', Carbon::today());
+
+        return response()->json([
+            'calories' => round($foods->sum('calories')),
+            'fat' => round($foods->sum('fat')),
+            'carbohydrate' => round($foods->sum('carbohydrate')),
+            'protein' => round($foods->sum('protein')),
+        ]);
     }
 }

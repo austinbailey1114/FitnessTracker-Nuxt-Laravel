@@ -86,10 +86,10 @@ export default {
             foods: [],
             recentFoods: [],
             totals: {
-                'cals': 200,
-                'fat': 41,
-                'carbs': 30,
-                'protein': 12
+                'cals': 0,
+                'fat': 0,
+                'carbs': 0,
+                'protein': 0
             },
             goals: {
                 'cals': null,
@@ -127,6 +127,16 @@ export default {
         ).then(function(response) {
             console.log(response)
             self.recentFoods = response.data
+        })
+
+        this.$axios.get(
+            process.env.apiURL + '/api/totals/' + self.user.id
+        ).then(function(response) {
+            console.log(response)
+            self.totals.cals = response.data.calories
+            self.totals.carbs = response.data.carbohydrate
+            self.totals.fat = response.data.fat
+            self.totals.protein = response.data.protein
         })
     },
     methods: {
@@ -201,21 +211,29 @@ export default {
             for (var i = 0; i < this.modalFood.nutrients.length; i++) {
                 if (this.modalFood.nutrients[i].nutrient_id == 205) {
                     params.carbohydrate = this.modalFood.nutrients[i].value
+                    this.totals.carbs += Math.round(this.modalFood.nutrients[i].value)
                 }
                 else if (this.modalFood.nutrients[i].nutrient_id == 204) {
                     params.fat = this.modalFood.nutrients[i].value
+                    this.totals.fat += Math.round(this.modalFood.nutrients[i].value)
                 }
                 else if (this.modalFood.nutrients[i].nutrient_id == 203) {
                     params.protein = this.modalFood.nutrients[i].value
+                    this.totals.protein += Math.round(this.modalFood.nutrients[i].value)
                 }
                 else if (this.modalFood.nutrients[i].nutrient_id == 208) {
                     params.calories = this.modalFood.nutrients[i].value
+                    this.totals.cals += Math.round(this.modalFood.nutrients[i].value)
                 }
             }
             this.$axios.post(
                 process.env.apiURL + '/api/food',
                 params
             ).then(function(response) {
+                self.recentFoods.push({
+                    name: self.modalFood.name
+                })
+
                 self.exitModal()
             })
         },

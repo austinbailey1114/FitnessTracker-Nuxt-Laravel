@@ -14,6 +14,7 @@ Route::get('/foodGoals/{id}', 'GoalsController@getFoodGoals');
 //foods
 Route::post('/food', 'FoodController@postFood');
 Route::get('/recentFoods/{user}', 'FoodController@recentFoods');
+Route::get('/totals/{user}', 'FoodController@getTotals');
 //lifts
 Route::post('/lift', 'LiftController@postLift');
 Route::get('/lifts/{id}', 'LiftController@getLift');
