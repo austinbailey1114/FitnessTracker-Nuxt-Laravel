@@ -44,7 +44,7 @@ module.exports = {
       './plugins/mixins/validation',
       './plugins/axios',
       { src: '~/plugins/directives', ssr: false },
-      { src: '~/plugins/radialProgress', ssr: false }
+      { src: '~/plugins/radialProgress', ssr: false },
   ],
 
   axios: {
