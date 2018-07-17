@@ -1,6 +1,5 @@
 <template lang="html">
     <div>
-        <link rel="stylesheet" href="#">
         <div class="top">
             <div class="top-left inline">
                 <div class="title inline">
@@ -8,8 +7,8 @@
                     <p class="header" align="center">Dashboard</p>
                 </div>
                 <div class="links-container inline">
-                    <a href="https://github.com/austinbailey1114/LiftAppSite" class="link">About</a>
-                    <a href="https://github.com/austinbailey1114/iOS" class="link">The App</a>
+                    <a href="https://github.com/austinbailey1114/FitnessTracker-nuxt-laravel" class="link">GitHub</a>
+                    <a href="https://austinmbailey.com" class="link">About</a>
                 </div>
             </div>
             <div class="dropdown inline">
@@ -18,7 +17,9 @@
         </div>
         <div class="dashboard">
             <lift-component></lift-component>
-            <food-component></food-component>
+            <no-ssr>
+                <food-component></food-component>
+            </no-ssr>
             <bodyweight-component></bodyweight-component>
         </div>
     </div>

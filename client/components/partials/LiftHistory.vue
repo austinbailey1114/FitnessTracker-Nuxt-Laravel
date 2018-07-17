@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="">
         <div>
-            <h2 class="header-small inline no-select">Your Lift Progress</h2>
+            <h2 class="header-small inline no-select">Lift Progress</h2>
             <a class="link-small inline no-select" @click="showGraph=!showGraph">View as {{ viewAs }}</a>
         </div>
         <div v-show="showGraph">
@@ -23,7 +23,7 @@
                     <th class="table-item inline">Date</th>
                     <th class="table-item inline">Delete</th>
                 </tr>
-                <tr v-for="(lift, index) in lifts" :key="index" class="table-row">
+                <tr v-for="(lift, index) in lifts" :key="index" class="table-row" :class="{ 'item-odd' : index % 2 == 0}">
                     <td class="table-item inline">{{ lift.weight }}</td>
                     <td class="table-item inline">{{ lift.reps }}</td>
                     <td class="table-item inline">{{ lift.type }}</td>

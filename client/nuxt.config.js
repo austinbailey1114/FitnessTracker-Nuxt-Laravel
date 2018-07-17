@@ -42,7 +42,9 @@ module.exports = {
   plugins: [
       './plugins/mixins/user',
       './plugins/mixins/validation',
-      './plugins/axios'
+      './plugins/axios',
+      { src: '~/plugins/directives', ssr: false },
+      { src: '~/plugins/radialProgress', ssr: false }
   ],
 
   axios: {
@@ -63,7 +65,7 @@ module.exports = {
       },
       redirect: {
           login: '/auth/signin',
-          home: '/'
+          home: '/dashboard'
       }
   },
   /*

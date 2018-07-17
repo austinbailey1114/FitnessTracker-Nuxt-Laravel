@@ -14,7 +14,7 @@
                     <th class="table-item inline">Date</th>
                     <th class="table-item inline">Delete</th>
                 </tr>
-                <tr v-for="(bodyweight, index) in bodyweights" :key="index" class="table-row">
+                <tr v-for="(bodyweight, index) in bodyweights" :key="index" class="table-row" :class="{ 'item-odd' : index % 2 == 0}">
                     <td class="table-item inline">{{ bodyweight.weight }}</td>
                     <td class="table-item inline">{{ bodyweight.human_date }}</td>
                     <td class="table-item"><button @click="deleteBodyweight(bodyweight)" class="delete-button inline">X</button></td>

@@ -14,7 +14,7 @@
                     </p>
                 </div>
                 <div class="lift-field">
-                    <p class="lift-prompt">Reps</p>
+                    <p class="lift-prompt">Repetitions</p>
                     <input v-model="liftFormData.reps" class="numeric-input lift-input" type="text" placeholder="pounds" autocomplete="off">
                     <p class="help is-danger" v-if="errors.reps">
                         {{ errors.reps[0] }}
@@ -22,13 +22,13 @@
                 </div>
                 <div class="lift-field">
                     <p class="lift-prompt">Date</p>
-                    <masked-input v-model="liftFormData.date" class="numeric-input lift-input" mask="11/11/1111" placeholder="mm/dd/yyyy"></masked-input>
+                    <input v-model="liftFormData.date" class="numeric-input lift-input" v-mask="'##/##/####'" placeholder="mm/dd/yyyy - blank for today">
                 </div>
                 <div class="lift-field">
                     <p class="lift-prompt inline">Type</p>
                     <div v-if="!newLiftType" class="select-container">
                         <select v-model="liftFormData.type" class="select" @change="selectChanged">
-                            <option value="select">-- Select Type--</option>
+                            <option :value="null">-- Select Type--</option>
                             <option value="new">New</option>
                             <option v-for="(type, index) in lifttypes" :key="index" :val="type.name">{{ type.name }}</option>
                         </select>
@@ -50,7 +50,6 @@
 import { mapGetters } from 'vuex'
 import LiftField from '@/components/partials/LiftField'
 import LiftHistory from '@/components/partials/LiftHistory'
-import MaskedInput from 'vue-masked-input'
 import moment from 'moment'
 import momentTimezone from 'moment-timezone'
 
@@ -58,7 +57,6 @@ export default {
     components: {
         'lift-history': LiftHistory,
         'lift-field': LiftField,
-        'masked-input': MaskedInput
     },
     data: function() {
         return {
@@ -87,7 +85,7 @@ export default {
         ).then(function(response) {
             self.lifttypes = response.data;
             self.selectedLiftChartType = response.data[0].name;
-            self.liftFormData.type = 'select';
+            self.liftFormData.type = null;
         });
     },
     methods: {
@@ -138,7 +136,7 @@ export default {
         },
         clearNewType() {
             this.newLiftType = false
-            this.liftFormData.type = "select"
+            this.liftFormData.type = null
             this.liftFormData.newType = null
         },
         setNewType() {
