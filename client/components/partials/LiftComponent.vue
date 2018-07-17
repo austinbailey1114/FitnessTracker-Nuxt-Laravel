@@ -4,7 +4,7 @@
             <lift-history :lifts="lifts" :lifttypes="lifttypes"></lift-history>
         </div>
         <div class="new-lift inline container-child">
-            <p class="header-small">Log A New Lift</p>
+            <p class="header-small">Log New Lift</p>
             <form>
                 <div class="lift-field">
                     <p class="lift-prompt">Weight</p>

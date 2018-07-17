@@ -14,22 +14,23 @@
                 <chart id="lift-chart" :axes="getLiftAxes"></chart>
             </div>
         </div>
-        <div v-show="!showGraph">
-            <div class="underline">
-                <p class="table-item inline">Weight</p>
-                <p class="table-item inline">Reps</p>
-                <p class="table-item inline">Type</p>
-                <p class="table-item inline">Date</p>
-            </div>
-            <div class="overflow-y">
-                <div v-for="(lift, index) in lifts" :key="index" class="table-row">
-                    <p class="table-item inline">{{ lift.weight }}</p>
-                    <p class="table-item inline">{{ lift.reps }}</p>
-                    <p class="table-item inline">{{ lift.type }}</p>
-                    <p class="table-item inline">{{ lift.human_date }}</p>
-                    <button @click="deleteLift(lift)" class="delete-button inline">X</button>
-                </div>
-            </div>
+        <div v-show="!showGraph" class="table-container">
+            <table class="table">
+                <tr class="underline">
+                    <th class="table-item inline">Weight</th>
+                    <th class="table-item inline">Reps</th>
+                    <th class="table-item inline">Type</th>
+                    <th class="table-item inline">Date</th>
+                    <th class="table-item inline">Delete</th>
+                </tr>
+                <tr v-for="(lift, index) in lifts" :key="index" class="table-row">
+                    <td class="table-item inline">{{ lift.weight }}</td>
+                    <td class="table-item inline">{{ lift.reps }}</td>
+                    <td class="table-item inline">{{ lift.type }}</td>
+                    <td class="table-item inline">{{ lift.human_date }}</td>
+                    <td class="table-item"><button @click="deleteLift(lift)" class="delete-button inline">X</button></td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>

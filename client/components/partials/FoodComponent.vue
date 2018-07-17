@@ -1,46 +1,52 @@
 <template lang="html">
     <div class="container">
         <div class="food-total container-child inline">
-            <div class="food-total-field">
+            <div class="">
                 <a class="link-small inline no-select" @click="editClicked()">{{ display }}</a>
+                <p class="header-small">Today's Nutrition</p>
+            </div>
+            <div class="calories-total">
                 <p class="food-total-prompt">Calories</p>
-                <div id="cals" class="food-total-bar inline">
-                    <div class="food-total-progess inline" :style="calsWidth">
-                        <p class="food-total-value">{{ totals.cals }}</p>
-                    </div>
-                </div>
-                <p v-if="!isEditing" class="food-total-goal inline">{{ goals.cals }}</p>
+                <radial-progress-bar :diameter="220"
+                                     :completed-steps="(totals.cals > 0 ? totals.cals : 1)"
+                                     :total-steps="goals.cals"
+                                     :startColor="'#F3C74F'"
+                                     :stopColor="'#F3C74F'">
+                <p v-if="!isEditing">{{ totals.cals }}/{{ goals.cals }}</p>
                 <input v-else class="food-goal-input inline" v-model="goals.cals">
+                </radial-progress-bar>
             </div>
-            <div class="food-total-field">
-                <p class="food-total-prompt">Fat</p>
-                <div id="fat" class="food-total-bar">
-                    <div class="food-total-progess inline" :style="fatWidth">
-                        <p class="food-total-value">{{ totals.fat }}</p>
+            <div class="progress-bars">
+                <div class="food-total-field">
+                    <p class="food-total-prompt">Fat</p>
+                    <div id="fat" class="food-total-bar">
+                        <div class="food-total-progess inline" :style="fatWidth">
+                            <p class="food-total-value">{{ totals.fat }}</p>
+                        </div>
                     </div>
+                    <p v-if="!isEditing" class="food-total-goal inline">{{ goals.fat }}</p>
+                    <input v-else class="food-goal-input inline" v-model="goals.fat">
                 </div>
-                <p v-if="!isEditing" class="food-total-goal inline">{{ goals.fat }}</p>
-                <input v-else class="food-goal-input inline" v-model="goals.fat">
-            </div>
-            <div class="food-total-field">
-                <p class="food-total-prompt">Carbs</p>
-                <div id="carbs" class="food-total-bar">
-                    <div class="food-total-progess inline" :style="carbsWidth">
-                        <p class="food-total-value">{{ totals.carbs }}</p>
+                <div class="food-total-field">
+                    <p class="food-total-prompt">Carbs</p>
+                    <div id="carbs" class="food-total-bar">
+                        <div class="food-total-progess inline" :style="carbsWidth">
+                            <p class="food-total-value">{{ totals.carbs }}</p>
+                        </div>
                     </div>
+                    <p v-if="!isEditing" class="food-total-goal inline">{{ goals.carbs }}</p>
+                    <input v-else class="food-goal-input inline" v-model="goals.carbs">
                 </div>
-                <p v-if="!isEditing" class="food-total-goal inline">{{ goals.carbs }}</p>
-                <input v-else class="food-goal-input inline" v-model="goals.carbs">
-            </div>
-            <div class="food-total-field">
-                <p class="food-total-prompt">Protein</p>
-                <div id="protein" class="food-total-bar">
-                    <div class="food-total-progess inline" :style="proteinWidth">
-                        <p class="food-total-value">{{ totals.protein }}</p>
+                <div class="food-total-field">
+                    <p class="food-total-prompt">Protein</p>
+                    <div id="protein" class="food-total-bar">
+                        <div class="food-total-progess inline" :style="proteinWidth">
+                            <p class="food-total-value">{{ totals.protein }}</p>
+                        </div>
                     </div>
+                    <p v-if="!isEditing" class="food-total-goal inline">{{ goals.protein }}</p>
+                    <input v-else class="food-goal-input inline" v-model="goals.protein">
                 </div>
-                <p v-if="!isEditing" class="food-total-goal inline">{{ goals.protein }}</p>
-                <input v-else class="food-goal-input inline" v-model="goals.protein">
             </div>
         </div>
         <div class="container-child inline food-stuff">
@@ -50,14 +56,14 @@
                 </form>
             </div>
             <div class="food-modal" v-if="foods.length > 0">
-                <p v-for="(food, index) in foods" :key="index" class="food-search-item" @click="showNutrients(food.ndbno)">
+                <p v-for="(food, index) in foods" :key="index" class="food-search-item" @click="showNutrients(food.ndbno)" :class="{ 'item-odd' : index % 2 == 0}">
                     {{ food.name }}
                 </p>
             </div>
             <div class="food-history">
                 <p v-if="recentFoods.length < 1" class="food-history-none">No recent foods to show</p>
                 <span v-else>
-                    <p v-for="(food, index) in recentFoods" :key="index" class="food-history-item">
+                    <p v-for="(food, index) in recentFoods" :key="index" class="food-history-item" :class="{ 'item-odd' : index % 2 == 0}">
                         {{ food.name }}
                     </p>
                 </span>
@@ -79,8 +85,12 @@
 <script>
 import $ from 'jquery'
 import { mapGetters } from 'vuex'
+import RadialProgressBar from 'vue-radial-progress'
 
 export default {
+    components: {
+        RadialProgressBar
+    },
     data: function() {
         return {
             foods: [],
@@ -98,7 +108,7 @@ export default {
                 'protein': null,
             },
             barStyle: {
-                height: '25px',
+                height: '30px',
                 zIndex: '3',
                 position: 'absolute',
                 borderRadius: '7px',
@@ -108,6 +118,8 @@ export default {
             isEditing: false,
             modal: false,
             modalFood: null,
+            completedSteps: 1250,
+            totalSteps: 2000
         }
     },
     created() {
@@ -243,23 +255,6 @@ export default {
         ])
     },
     computed: {
-        calsWidth: function() {
-            var baseWidth = $('#cals').width();
-            var barWidth = (this.totals.cals / this.goals.cals) * baseWidth;
-            if (barWidth > baseWidth) {
-                return {
-                    width: baseWidth + 'px',
-                    backgroundColor: '#6F9F52',
-                    ...this.barStyle
-                };
-            }
-            return {
-                width: (this.totals.cals / this.goals.cals) * baseWidth + 'px',
-                minWidth: 'max-content',
-                backgroundColor: '#E74C3C',
-                ...this.barStyle
-            };
-        },
         fatWidth: function() {
             var baseWidth = $('#fat').width();
             var barWidth = (this.totals.fat / this.goals.fat) * baseWidth;
@@ -271,8 +266,8 @@ export default {
                 };
             }
             return {
-                width: barWidth + 'px',
-                backgroundColor: '#E74C3C',
+                width: (barWidth < 28 ? '28px' : barWidth + 'px'),
+                backgroundColor: '#508CFC',
                 ...this.barStyle
             }
         },
@@ -287,8 +282,8 @@ export default {
                 };
             }
             return {
-                width: barWidth + 'px',
-                backgroundColor: '#E74C3C',
+                width: (barWidth < 28 ? '28px' : barWidth + 'px'),
+                backgroundColor: '#508CFC',
                 ...this.barStyle
             }
         },
@@ -303,8 +298,8 @@ export default {
                 };
             }
             return {
-                width: barWidth + 'px',
-                backgroundColor: '#E74C3C',
+                width: (barWidth < 28 ? '28px' : barWidth + 'px'),
+                backgroundColor: '#508CFC',
                 ...this.barStyle
             }
         },
@@ -317,9 +312,17 @@ export default {
 </script>
 
 <style lang="css">
+
+.food-total-value {
+    line-height: 30px;
+    margin-left: 10px;
+    font-weight: 200;
+    font-size: 14px;
+}
+
 .food-total-bar {
-    height: 25px;
-    width: 80%;
+    height: 30px;
+    width: 85%;
     background-color: #EEEEF2;
     border-radius: 7px;
     float: left;
@@ -327,11 +330,12 @@ export default {
                 0 2px 5px 0 rgba(50,50,93,.08),
                 0 1px 1.5px 0 rgba(0,0,0,.07),
                 0 1px 2px 0 rgba(0,0,0,.08);
+                margin-right: 8px;
 }
 
 .food-total-progress {
     background-color: red;
-    height: 25px;
+    height: 30px;
     float: left;
     position: absolute;
     z-index: 3;
@@ -343,8 +347,9 @@ export default {
 
 .food-total-goal {
     font-weight: 200;
-	padding: 7px 20px;
 	font-size: 14px;
+    line-height: 30px;
+    left: 5px;
 }
 
 .food-history-none {
@@ -357,11 +362,21 @@ export default {
 .food-goal-input {
     width: 30px;
     font-weight: 200;
-	padding: 5.5px 10px;
+	padding: 2px 2px;
+    text-align: center;
     width: 50px;
+    color: white;
 	font-size: 14px;
-    border: 1px solid #DCDCDC;
-    border-radius: 5px;
-    margin-left: 5px;
+    background-color: #3B3C4E;
+    border: none;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.food-total-field {
+    margin-top: 15px;
+}
+
+.item-odd {
+    background-color: #424355;
 }
 </style>

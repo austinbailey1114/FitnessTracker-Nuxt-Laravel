@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="dropdown inline">
-                <a @click.prevent="logout" class="link">Sign out</a>
+                <a @click.prevent="logout" class="link sign-out">Sign out</a>
             </div>
         </div>
         <div class="dashboard">

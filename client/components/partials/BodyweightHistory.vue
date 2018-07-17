@@ -7,18 +7,19 @@
         <div v-show="showGraph" class="bodyweight-chart-container">
             <chart id="bodyweight-chart" :axes="getBodyweightAxes"></chart>
         </div>
-        <div v-show="!showGraph">
-            <div class="underline">
-                <p class="table-item inline">Weight</p>
-                <p class="table-item inline">Date</p>
-            </div>
-            <div class="overflow-y">
-                <div v-for="(bodyweight, index) in bodyweights" :key="index" class="table-row">
-                    <p class="table-item inline">{{ bodyweight.weight }}</p>
-                    <p class="table-item inline">{{ bodyweight.human_date }}</p>
-                    <button @click="deleteBodyweight(bodyweight)" class="delete-button inline">X</button>
-                </div>
-            </div>
+        <div v-show="!showGraph" class="table-container">
+            <table class="table">
+                <tr>
+                    <th class="table-item inline">Weight</th>
+                    <th class="table-item inline">Date</th>
+                    <th class="table-item inline">Delete</th>
+                </tr>
+                <tr v-for="(bodyweight, index) in bodyweights" :key="index" class="table-row">
+                    <td class="table-item inline">{{ bodyweight.weight }}</td>
+                    <td class="table-item inline">{{ bodyweight.human_date }}</td>
+                    <td class="table-item"><button @click="deleteBodyweight(bodyweight)" class="delete-button inline">X</button></td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>

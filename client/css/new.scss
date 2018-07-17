@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Roboto' !important;
+    font-family: 'Nunito', serif !important;
 	margin:0;
 	padding: 0;
 	background-color: #292C3D;
@@ -15,6 +15,27 @@ body {
 p {
 	margin: 0;
 	padding: 0;
+}
+
+.section {
+	font-size: 26px;
+	font-weight: 200;
+	margin-top: 30px;
+	margin-left: 40px;
+	border-bottom: 1px solid #adadad;
+	display: inline-block;
+	padding-right: 4px;
+	color: #adadad;
+}
+
+::-webkit-scrollbar
+{
+    width: 0px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-color: transparent;
+    -webkit-border-radius: 6px;
 }
 
 .help {
@@ -32,6 +53,15 @@ p {
 	line-height: 90px;
     color: white;
     margin-left: 20px;
+}
+
+.header-very-small {
+	font-size: 20px;
+	font-weight: 200;
+	padding-left: 6px;
+	margin-bottom: 7px;
+	border-bottom: 1px solid white;
+	width: 180px;
 }
 
 .header-small {
@@ -134,6 +164,12 @@ p {
     color: white;
 }
 
+.sign-out {
+    margin-right: 40px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 //lift
 
 .lift-graph {
@@ -166,6 +202,7 @@ p {
 	width: 97%;
 	border-bottom: 1px solid #D8D3D1;
     background-color: #3B3C4E;
+    color: white;
 }
 
 .lift-chart-container {
@@ -206,12 +243,12 @@ p {
 //food
 
 .food-stuff {
-	float: left;
+	float: right;
 	width: 50%;
 }
 
 .food-total {
-	float: right;
+	float: left;
 	width: 45%;
 }
 
@@ -235,4 +272,130 @@ p {
     width: 95%;
     margin: auto;
     margin-top: 10px;
+}
+
+//food
+
+.calories-total {
+	display: inline-block;
+	float: left;
+	width: 40%;
+	margin-left: 2.5%
+}
+
+.progress-bars {
+	display: inline-block;
+	float: right;
+	width: 50%;
+	margin: auto;
+}
+
+.food-total-prompt {
+	margin-top: 8px;
+	font-weight: 200;
+	padding: 8px;
+}
+
+
+.food-form {
+	text-align: center;
+}
+
+.food-search {
+	padding: 10px 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: none;
+	border-bottom: 1px solid white;
+	background: none;
+	color: white;
+	font-size: 16px;
+	text-align: left;
+	font-weight: 200;
+	width: 90%;
+
+}
+
+.food-history {
+	height: 250px;
+	width: 100%;
+	overflow-y: scroll;
+}
+
+.food-history-item {
+	font-weight: 200;
+	padding: 5px;
+}
+
+.food-search-item {
+	font-weight: 200;
+	padding: 5px;
+}
+
+.food-search-item:hover {
+	background-color: #DCDCDC;
+}
+
+.food-modal {
+	width: 43%;
+	background-color: #3B3C4E;
+	position: absolute;
+	border-radius: 4px;
+	box-shadow: 0 0 0 1px rgba(50,50,93,.1),
+                0 2px 5px 0 rgba(50,50,93,.08),
+                0 1px 1.5px 0 rgba(0,0,0,.07),
+                0 1px 2px 0 rgba(0,0,0,.08);
+	z-index: 5;
+	height: content;
+	max-height: 250px;
+	overflow-y: scroll;
+}
+
+.modal {
+	position: absolute;
+	width: 50%;
+	top: 50%;
+  	left: 25%;
+	display: none;
+	background-color: #3B3C4E;
+	z-index: 10;
+	box-shadow: 0 7px 14px 0 rgba(50,50,93,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+	border-radius: 4px
+}
+
+.modal-is-active {
+	display: block;
+}
+
+//table
+.table-container {
+	height: 290px;
+	overflow-y: scroll;
+	width: 100%;
+}
+
+.table {
+	width: 100%;
+}
+
+.table-row {
+
+}
+
+.table-item {
+	text-align: center;
+}
+
+.delete-button {
+	background: none;
+	color: rgb(249,87,102);
+	border: none;
+	font-size: 16px;
+	margin: auto;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.delete-button:hover {
+	background-color: #292C3D;
 }
