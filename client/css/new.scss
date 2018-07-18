@@ -286,7 +286,7 @@ p {
 .progress-bars {
 	display: inline-block;
 	float: right;
-	width: 50%;
+	width: 57%;
 	margin: auto;
 }
 
@@ -467,4 +467,150 @@ p {
 
 .delete-button:hover {
 	background-color: #292C3D;
+}
+
+//auth
+
+.auth-parent {
+	position: relative;
+	height: 100vh;
+}
+.auth-container {
+	margin-left: 20%;
+	background-color: #3B3C4E;
+	border-radius: 5px;
+	width: 60%;
+	-webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
+    box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
+	position: absolute;
+  	top: 45%;
+  	transform: translateY(-50%);
+}
+
+.auth-header {
+	font-weight: 600;
+	padding: 10px 10px 0px 20px;
+	text-align: center;
+	font-size: 29px;
+	margin-bottom: 15px;
+}
+
+.auth-image-container {
+	text-align: center;
+}
+
+.auth-image {
+	border-radius: 8px;
+	margin: auto;
+	text-align: center;
+}
+
+.auth-prompt {
+	font-size: 24px;
+	font-weight: 500;
+	margin-top: 25px;
+}
+
+.auth-input {
+	background: none;
+	border:none;
+	border-bottom: 1px solid #DCDCDC;
+	padding: 5px 10px;
+	width: 95%;
+	color: white;font-size: 15px;
+	font-size: 17px;
+}
+
+.auth-left {
+	display: inline-block;
+	background-color: #1B1E2F;
+	padding: 30px;
+    padding-top: 20px;
+	border-radius: 5px 0px 0px 5px;
+	float: left;
+	width: 50%;
+}
+
+.auth-right {
+	display: inline-block;
+	border-radius: 0px 5px 5px 0px;
+	height: 100%;
+	min-height: 100%;
+	float: right;
+	width: 50%;
+	overflow: hidden;
+	// background-image: url('/preview-2.png');
+    // background-size: 100%;
+    // display: block;
+    // filter: blur(5px);
+}
+
+.auth-submit-container {
+	text-align: right;
+}
+
+.auth-submit {
+	font-size: 17px;
+	font-weight: 500;
+	margin-right: 5%;
+	margin-top: 25px;
+	border: none;
+	background-color: #7354ff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: white;
+}
+
+.auth-link {
+	display: block;
+	display: inline-block;
+	color: white;
+	text-decoration: none;
+	float: left;
+	margin-top: 10px;
+}
+
+.auth-bottom-link {
+	display: block;
+}
+
+.list {
+	margin: auto;
+}
+
+.list-item {
+	font-size: 17px;
+	font-weight: 600;
+	padding: 5px 0px;
+}
+
+.test {
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+	text-align: center;
+	padding: 0px 0px;
+	font-size: 20px;
+}
+
+.garble {
+	position: absolute;
+	top: 180px;
+	text-align: center;
+	width: 50%;
+}
+
+.background {
+	background-image: url('/preview-2.png');
+    background-size: cover;
+	height: 414px;
+	filter: blur(10px);
+	transform: scale(1.1, 1.1);
+}
+
+.auth-info {
+	font-size: 18px;
+	padding: 0px 20px;
 }
