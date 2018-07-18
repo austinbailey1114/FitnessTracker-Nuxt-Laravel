@@ -46,11 +46,11 @@
 
             <div class="modal" :class="{ 'modal-is-active': modal }">
                 <div v-if="modalFood">
-                    <p class="food-history-item"> {{ modalFood.name }}</p>
+                    <p class="food-history-item modal-title"> {{ modalFood.name }}</p>
                     <div v-for="(nutrient, index) in modalFood.nutrients" :key="index">
                         <p class="food-history-item">{{ nutrient.nutrient }}: {{ nutrient.value }}{{ nutrient.unit }}</p>
                     </div>
-                    <button class="form-submit" @click="saveFood">Save</button>
+                    <button class="form-submit" @click="saveFood">Save Food</button>
                     <button class="form-submit" @click="exitModal">Back</button>
                 </div>
             </div>
@@ -189,24 +189,28 @@ export default {
                 user: this.user.id,
                 name: this.modalFood.name,
             }
+            var currentNutrient
             for (var i = 0; i < this.modalFood.nutrients.length; i++) {
-                if (this.modalFood.nutrients[i].nutrient_id == 205) {
-                    params.carbohydrate = this.modalFood.nutrients[i].value
-                    this.totals.carbs += Math.round(this.modalFood.nutrients[i].value)
+                currentNutrient = this.sanitizeNutrient(this.modalFood.nutrients[i])
+                if (currentNutrient.nutrient_id == 205) {
+                    params.carbohydrate = currentNutrient.value
+                    this.totals.carbs += Math.round(currentNutrient.value)
                 }
-                else if (this.modalFood.nutrients[i].nutrient_id == 204) {
-                    params.fat = this.modalFood.nutrients[i].value
-                    this.totals.fat += Math.round(this.modalFood.nutrients[i].value)
+                else if (currentNutrient.nutrient_id == 204) {
+                    params.fat = currentNutrient.value
+                    this.totals.fat += Math.round(currentNutrient.value)
                 }
-                else if (this.modalFood.nutrients[i].nutrient_id == 203) {
-                    params.protein = this.modalFood.nutrients[i].value
-                    this.totals.protein += Math.round(this.modalFood.nutrients[i].value)
+                else if (currentNutrient.nutrient_id == 203) {
+                    params.protein = currentNutrient.value
+                    this.totals.protein += Math.round(currentNutrient.value)
                 }
-                else if (this.modalFood.nutrients[i].nutrient_id == 208) {
-                    params.calories = this.modalFood.nutrients[i].value
-                    this.totals.cals += Math.round(this.modalFood.nutrients[i].value)
+                else if (currentNutrient.nutrient_id == 208) {
+                    params.calories = currentNutrient.value
+                    this.totals.cals += Math.round(currentNutrient.value)
                 }
             }
+
+            console.log(params)
             this.$axios.post(
                 process.env.apiURL + '/api/food',
                 params
@@ -217,6 +221,12 @@ export default {
 
                 self.exitModal()
             })
+        },
+        sanitizeNutrient(nutrient) {
+            if (isNaN(nutrient.value)) {
+                nutrient.value = 0
+            }
+            return nutrient
         },
         ...mapGetters([
             'getKey',

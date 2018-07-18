@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <div v-else>
-                        <div class="inline" @click.prevent="clearNewType">
+                        <div class="X" @click.prevent="clearNewType">
                             X
                         </div>
                         <input class="lift-input" placeholder='New Lift Type' autocomplete='off' v-model="liftFormData.newType">
