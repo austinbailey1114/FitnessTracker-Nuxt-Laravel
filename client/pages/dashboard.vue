@@ -51,5 +51,120 @@ export default {
 </script>
 
 <style lang="css">
+body {
+    font-family: 'Nunito', serif !important;
+    margin:0;
+    padding: 0;
+    background-color: #292C3D;
+    color: #EAEDEE;
+}
+
+@media screen and (max-width: 1280px) {
+    body {
+        transform: scale(0.8);
+        transform-origin: 0 0;
+        width: 125%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        transform: scale(0.7);
+        transform-origin: 0 0;
+        width: 142.857%;
+    }
+
+}
+
+@media screen and (max-width: 850px) {
+    .progress-bars {
+        width: 53%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        width: 200%;
+    }
+
+    .progress-bars {
+        width: 57%;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        transform: scale(0.4);
+        transform-origin: 0 0;
+        width: 250%;
+    }
+
+    .progress-bars {
+        width: 57%;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        transform: scale(0.6);
+        transform-origin: 0 0;
+        width: 166.666%;
+    }
+
+    .container-child {
+        display: block;
+        position: relative;
+        margin-bottom: 20px;
+        height: 100%;
+    }
+
+    .container {
+        position: relative;
+        height: none;
+        display: block;
+        margin-bottom: 400px;
+    }
+
+    .new-lift {
+        float: none;
+        width: 100%;
+    }
+
+    .lift-graph {
+        float: none;
+        width: 100%;
+    }
+
+    .top-left {
+        width: 80%;
+    }
+
+    .food-total {
+        float: none;
+        width: 100%;
+        display: block;
+    }
+
+    .food-stuff {
+        float: none;
+        width: 100%;
+    }
+
+    .bodyweight-graph {
+        float: none;
+        width: 100%;
+    }
+
+    .new-weight {
+        float: none;
+        width: 100%;
+    }
+
+}
 
 </style>
