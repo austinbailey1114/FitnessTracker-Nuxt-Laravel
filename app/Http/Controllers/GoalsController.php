@@ -14,9 +14,9 @@ class GoalsController extends Controller
             $goals = Goals::create([
                 'user' => $request->id,
                 'calories' => 2000,
-                'fat' => 50,
+                'fat' => 30,
                 'carbohydrate' => 40,
-                'protein' => 30,
+                'protein' => 50,
             ]);
         }
 
