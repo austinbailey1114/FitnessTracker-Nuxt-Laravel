@@ -17,7 +17,6 @@ export default {
             	    datasets: [{
             	        borderColor: 'rgb(249,87,102)',
             	        backgroundColor: 'rgba(249,87,102,0.15)',
-            	        //fill: true,
             	        pointBackgroundColor: 'rgb(249,87,102)',
             	        data: this.axes.yAxis,
             	    }]
