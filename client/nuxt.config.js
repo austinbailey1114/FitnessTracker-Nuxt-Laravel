@@ -64,7 +64,7 @@ module.exports = {
           }
       },
       redirect: {
-          login: '/auth/signin',
+          login: '/',
           home: '/dashboard'
       }
   },

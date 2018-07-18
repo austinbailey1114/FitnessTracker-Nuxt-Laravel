@@ -30,7 +30,8 @@
                         <select v-model="liftFormData.type" class="select" @change="selectChanged">
                             <option :value="null">-- Select Type--</option>
                             <option value="new">New</option>
-                            <option v-for="(type, index) in lifttypes" :key="index" :val="type.name">{{ type.name }}</option>
+
+                            <option v-if="lifttypes.length > 0" v-for="(type, index) in lifttypes" :key="index" :val="type.name">{{ type.name }}</option>
                         </select>
                     </div>
                     <div v-else>

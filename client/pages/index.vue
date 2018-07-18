@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <div v-if="!authenticated" class="auth-parent">
+        <div class="auth-parent">
             <div class="auth-container">
                 <div class="auth-left">
                     <div class="auth-image-container">
@@ -34,22 +34,8 @@
                     <div class="garble">
                         <p class="auth-info">Track Nutrition, Weight Lifting, and Bodyweight with Fitness Tracker</p>
                     </div>
-
-                    <!-- <p class="auth-header">About Fitness Tracker</p>
-                    <ul class="list">
-                        <li class="list-item">Track Weight Lifting Data</li>
-                        <li class="list-item">Log Meals From Over 8000 Foods</li>
-                        <ul class="list">
-                            <li class="list-item">USDA Database</li>
-                            <li class="list-item">Track Daily Macronutrients</li>
-                        </ul>
-                        <li class="list-item">Track Bodyweight</li>
-                    </ul> -->
                 </div>
             </div>
-        </div>
-        <div v-else>
-
         </div>
     </div>
 </template>
@@ -72,10 +58,6 @@ export default {
             await this.$auth.login({
                 data: this.form
             });
-
-            // this.$router.push({
-            //     path: '/'
-            // });
         }
     }
 }

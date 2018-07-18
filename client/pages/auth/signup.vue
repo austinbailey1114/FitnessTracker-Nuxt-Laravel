@@ -1,25 +1,43 @@
 <template lang="html">
     <div class="">
-        <div class="container has-text centered">
-            <div class="column is-two-fifths centered">
+        <div class="auth-container">
+            <div class="auth-left">
+                <div class="auth-image-container">
+                    <img src="/hugeIcon.png" height="75" class="auth-image">
+                </div>
                 <form @submit.prevent="submit()">
-                    <p>Email</p>
-                    <input type="email" name="email" v-model="form.email" class="input is-large" :class="{ 'is-danger': errors.email }">
+                    <p class="auth-prompt">Email</p>
+                    <input type="email" name="email" v-model="form.email" class="auth-input" :class="{ 'is-danger': errors.email }" placeholder="example@example.com">
                     <p class="help is-danger" v-if="errors.email">
                         {{ errors.email[0] }}
                     </p>
-                    <p>Password</p>
-                    <input type="password" name="password" v-model="form.password" class="input is-large" :class="{ 'is-danger': errors.password }">
+                    <p class="auth-prompt">Password</p>
+                    <input type="password" name="password" v-model="form.password" class="auth-input" :class="{ 'is-danger': errors.password }" placeholder="****">
                     <p class="help is-danger" v-if="errors.password">
                         {{ errors.password[0] }}
                     </p>
-                    <p>Name</p>
-                    <input type="text" name="name" v-model="form.name" class="input is-large" :class="{ 'is-danger': errors.name }">
+                    <p class="auth-prompt">Name</p>
+                    <input type="text" name="name" v-model="form.name" class="auth-input" :class="{ 'is-danger': errors.name }" placeholder="John Smith">
                     <p class="help is-danger" v-if="errors.name">
                         {{ errors.name[0] }}
                     </p>
-                    <button class="button">Login</button>
+                    <div class="auth-submit-container">
+                        <button class="auth-submit">Sign Up</button>
+                    </div>
+                    <div class="auth-bottom-link">
+                        <nuxt-link :to="{ name: 'index' }" class="auth-link">
+                            <u>I have an account</u>
+                        </nuxt-link>
+                    </div>
                 </form>
+            </div>
+            <div class="auth-right">
+                <div class="background-signup background">
+
+                </div>
+                <div class="garble garble-signup">
+                    <p class="auth-info">Track Nutrition, Weight Lifting, and Bodyweight with Fitness Tracker</p>
+                </div>
             </div>
         </div>
     </div>

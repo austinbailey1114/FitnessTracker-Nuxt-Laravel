@@ -316,8 +316,13 @@ p {
 }
 
 .food-history {
-	height: 250px;
+	height: 300px;
 	width: 100%;
+	overflow-y: scroll;
+}
+
+.food-search-results {
+	height: 250px;
 	overflow-y: scroll;
 }
 
@@ -484,7 +489,7 @@ p {
     -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
     box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.17);
 	position: absolute;
-  	top: 45%;
+  	top: 50%;
   	transform: translateY(-50%);
 }
 
@@ -602,6 +607,10 @@ p {
 	width: 50%;
 }
 
+.garble-signup {
+	top: 215px;
+}
+
 .background {
 	background-image: url('/preview-2.png');
     background-size: cover;
@@ -610,7 +619,15 @@ p {
 	transform: scale(1.1, 1.1);
 }
 
+.background-signup {
+	height: 502px;
+}
+
 .auth-info {
 	font-size: 18px;
 	padding: 0px 20px;
+}
+
+.search-prompt {
+	text-align: center;
 }

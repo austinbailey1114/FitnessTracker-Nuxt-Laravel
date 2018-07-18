@@ -23,23 +23,27 @@
         <div class="container-child inline food-stuff">
             <div class="new-food">
                 <p class="header-small">Log New Meal</p>
-                <form class="food-form" action="#" method="post">
-                    <input class="food-search" placeholder="Search food database" @input="search" v-model="searchInput">
-                </form>
-            </div>
-            <div class="food-modal" v-if="foods.length > 0">
-                <p v-for="(food, index) in foods" :key="index" class="food-search-item" @click="showNutrients(food.ndbno)" :class="{ 'item-odd' : index % 2 == 0}">
-                    {{ food.name }}
-                </p>
-            </div>
-            <div class="food-history">
-                <!-- <p v-if="recentFoods.length < 1" class="food-history-none">No recent foods to show</p>
-                <span v-else>
+                <a class="link-small inline no-select" @click="showHistory=!showHistory">{{ (showHistory ? 'View Search' : 'View History') }}</a>
+                <div v-show="!showHistory">
+                    <form class="food-form" action="#" method="post">
+                        <input class="food-search" placeholder="Search food database" @input="search" v-model="searchInput">
+                    </form>
+                    <div class="food-search-results">
+                        <p class="search-prompt" v-if="foods.length < 1">Search From USDA Database of Over 8000 Foods</p>
+                        <span v-else>
+                            <p v-for="(food, index) in foods" :key="index" class="food-search-item" @click="showNutrients(food.ndbno)" :class="{ 'item-odd' : index % 2 == 0}">
+                                {{ food.name }}
+                            </p>
+                        </span>
+                    </div>
+                </div>
+                <div v-show="showHistory" class="food-history">
                     <p v-for="(food, index) in recentFoods" :key="index" class="food-history-item" :class="{ 'item-odd' : index % 2 == 0}">
                         {{ food.name }}
                     </p>
-                </span> -->
+                </div>
             </div>
+
             <div class="modal" :class="{ 'modal-is-active': modal }">
                 <div v-if="modalFood">
                     <p class="food-history-item"> {{ modalFood.name }}</p>
@@ -83,7 +87,8 @@ export default {
             modal: false,
             modalFood: null,
             completedSteps: 1250,
-            totalSteps: 2000
+            totalSteps: 2000,
+            showHistory: false,
         }
     },
     created() {

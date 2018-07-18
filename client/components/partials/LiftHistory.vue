@@ -7,7 +7,8 @@
         <div v-show="showGraph">
             <div class="select-container narrow-select">
                 <select v-model="selectedLiftChartType" class="select">
-                    <option v-for="(type, index) in lifttypes" :key="index" :val="type.name">{{ type.name }}</option>
+                    <option v-if="lifttypes.length > 0" v-for="(type, index) in lifttypes" :key="index" :val="type.name">{{ type.name }}</option>
+                    <option v-if="lifttypes.length < 1" :value="null">No Lifts Logged</option>
                 </select>
             </div>
             <div class="lift-chart-container">
@@ -69,9 +70,15 @@ export default {
             'getId'
         ])
     },
+    created() {
+    },
     watch: {
         lifttypes: function() {
-            this.selectedLiftChartType = this.lifttypes[0].name
+            if (this.lifttypes.length > 0) {
+                this.selectedLiftChartType = this.lifttypes[0].name
+            } else {
+                return null
+            }
         }
     },
     computed: {
