@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Graph from '@/components/partials/Chart.vue'
+import Graph from '@/components/Chart.vue'
 import moment from 'moment'
 import { mapGetters } from 'vuex'
 

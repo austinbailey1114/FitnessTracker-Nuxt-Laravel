@@ -21,7 +21,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import BodyweightHistory from '@/components/partials/BodyweightHistory'
+import BodyweightHistory from '@/components/bodyweight/BodyweightHistory'
 
 export default {
     components: {

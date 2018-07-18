@@ -49,8 +49,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import LiftField from '@/components/partials/LiftField'
-import LiftHistory from '@/components/partials/LiftHistory'
+import LiftField from '@/components/lifts/LiftField'
+import LiftHistory from '@/components/lifts/LiftHistory'
 import moment from 'moment'
 import momentTimezone from 'moment-timezone'
 
