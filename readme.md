@@ -1,5 +1,9 @@
 # Fitness Tracker
 
+## Try it
+[Log in here with email 'demo@demo.com' and password 'demo'](http://austinmbailey.com/projects/fitness-tracker/)
+* Adding foods on the demo account will not save them
+* [Radial Progress not filling on safari](https://github.com/austinbailey1114/FitnessTracker-Nuxt-Laravel/issues/18)
 ## Tools
 Fitness Tracker uses Nuxt (Vue) for a reactive front-end, which connects to a separate Laravel back-end API. I used JSON Web Tokens (JWT) to ensure security of data exchange between front-end and back-end.
 ## Features
